@@ -1,0 +1,8 @@
+fastapi uvicorn
+librosa
+matplotlib
+soundfile
+noisereduce
+python-multipart
+openai-whisper
+numpy

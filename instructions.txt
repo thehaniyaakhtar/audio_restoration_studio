@@ -1,0 +1,23 @@
+Understanding the Basics
+an mp3 file just has numbers in it, that measure the air pressure sampled thousands of times/sec
+waveform of clean and noisy speech is hard to tell apart
+thus, signal processing to convert waveform to spectogram (shows which freq are active at each moment)
+where: x axis  time
+       y axis frequency
+       brightness ~ Energy
+
+audio -> spectorgram: turns into an image
+audio restoration systems are basically image restoration systems
+
+microphone recording:
+recorded(t) = speech(t) + noise(t)
+also an estimation problem
+
+A DSP ie Digital Signal Processor
+removes low frequency hum
+
+Librosa: library; opens audio files
+
+How to seperate indivdual componenets in a waveform: Fourier Transform
+
+
