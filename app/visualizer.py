@@ -1,4 +1,4 @@
-import matplotlib.pylot as plt
+import matplotlib.pyplot as plt
 import librosa.display
 
 # Drawing the Waveform
