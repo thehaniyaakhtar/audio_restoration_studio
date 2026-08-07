@@ -28,7 +28,12 @@ STEP 2:
 Creating a spectogram, answering what frequencies exist at a given time
 Creating waveform to undertand amplitude over time
 
-2. Creating waveform to undertand 
+2. Audio restoration
 noisereduce: library to reduce noise reduction
+enhancer.py
+
+3. Speech Understanding
+Creating speech to text module
+
 
 
