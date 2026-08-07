@@ -5,7 +5,7 @@ from app.visualizer import (
 )
 
 audio, sr = load_audio(
-    "sample_audio/sample.wav"
+    "sample_audio/sample.mp3"
 )
 
 save_waveform(
@@ -17,7 +17,7 @@ save_waveform(
 save_spectrogram(
     audio,
     sr,
-    "spectogram.png"
+    "spectrogram.png"
 )
 
-print("Visualization complete")
+print("Visualization complete!")
