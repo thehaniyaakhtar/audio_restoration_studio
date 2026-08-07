@@ -34,6 +34,7 @@ enhancer.py
 
 3. Speech Understanding
 Creating speech to text module
+Using ffmpeg and whisper to do so
 
 
 
