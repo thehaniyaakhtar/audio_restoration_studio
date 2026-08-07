@@ -1,4 +1,4 @@
-import noisereduction as nr
+import noisereduce as nr
 
 def remove_noise(audio, sr):
     cleaned_audio = nr.reduce_noise(

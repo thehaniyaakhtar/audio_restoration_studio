@@ -1,4 +1,5 @@
 import librosa
+import soundfile as sf
 
 # Load Audio
 def load_audio(path):
@@ -9,4 +10,7 @@ def load_audio(path):
     
     return audio, sr
 
-# Making Waveform
+# Saving cleaned audio files
+def save_audio(path, audio, sr):
+    sf.write(path, audio, sr)
+
