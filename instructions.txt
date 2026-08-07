@@ -20,4 +20,15 @@ Librosa: library; opens audio files
 
 How to seperate indivdual componenets in a waveform: Fourier Transform
 
+Understand and Visualize Audio
 
+STEP 1:
+loading audio via audi_utils.py
+converting mp3 files into audi0 = [], sr
+
+STEP 2:
+Creating a spectogram, answering what frequencies exist at a given time
+Creating waveform to undertand amplitude over time
+
+Creating waveform to undertand 
+noisereduce: library to reduce noise reduction
