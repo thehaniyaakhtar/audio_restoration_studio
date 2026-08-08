@@ -6,3 +6,5 @@ noisereduce
 python-multipart
 openai-whisper
 numpy
+google-genai
+dotenv

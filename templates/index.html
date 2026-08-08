@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <title>
         AI Audio Restoration Studio
     </title>
@@ -10,15 +11,26 @@
         rel="stylesheet"
         href="/static/style.css"
     >
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>
-        AI Audio Restoration Studio
-    </h1>
+    <div class="hero">
+
+        <h1>
+            AI Audio Restoration Studio
+        </h1>
+
+        <p>
+            Upload audio, remove noise,
+            generate transcripts, and
+            visualize signal quality.
+        </p>
+
+    </div>
 
     <form
         id="upload-form"
@@ -29,6 +41,7 @@
             type="file"
             id="audio"
             accept=".mp3,.wav"
+            required
         >
 
         <button type="submit">
@@ -37,8 +50,11 @@
 
     </form>
 
-    <div id="loading" style="display:none">
-    Processing Audio...
+    <div
+        id="loading"
+        style="display:none"
+    >
+        Processing Audio...
     </div>
 
     <div id="results"></div>
@@ -56,8 +72,17 @@ async function(e){
     e.preventDefault();
 
     const file =
-    document.getElementById("audio")
+    document
+    .getElementById("audio")
     .files[0];
+
+    if(!file){
+        return;
+    }
+
+    document
+    .getElementById("loading")
+    .style.display = "block";
 
     const formData =
     new FormData();
@@ -66,29 +91,25 @@ async function(e){
         "file",
         file
     );
-    document
-    .getElementById("loading")
-    .style.display = "block";
 
-    const response =
-    await fetch(
-        "/process",
-        {
-            method:"POST",
-            body:formData
-        }
-    );
+    try {
 
-    const data =
-    await response.json();
+        const response =
+        await fetch(
+            "/process",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
 
-    document
-    .getElementById("loading")
-    .style.display = "none";
+        const data =
+        await response.json();
 
-    document
-    .getElementById("results")
-    .innerHTML = `
+        document
+        .getElementById("results")
+        .innerHTML = `
+
         <h2>Cleaned Audio</h2>
 
         <audio controls>
@@ -98,13 +119,9 @@ async function(e){
             >
         </audio>
 
-        <h2>Transcript</h2>
-
-        <p>${data.transcript}</p>
-
         <h2>Metrics</h2>
 
-        <div class="metrics">
+        <div class="metrics-grid">
 
             <div class="card">
                 <h3>Duration</h3>
@@ -120,34 +137,77 @@ async function(e){
 
         <h2>AI Assessment</h2>
 
-        <pre>
-        ${data.report}
-        </pre>
+        <div class="card">
+            <p>${data.assessment}</p>
+        </div>
 
-        <h2>Waveform</h2>
+        <h2>Transcript</h2>
 
-        <img
-            src="${data.waveform}"
-            width="700"
-        >
+        <div class="card">
+            <p>${data.transcript}</p>
+        </div>
 
-        <h2>Spectrogram</h2>
+        <div class="results-grid">
 
-        <img
-            src="${data.spectrogram}"
-            width="700"
-        >
+            <div>
+
+                <h2>Waveform</h2>
+
+                <img
+                    src="${data.waveform}"
+                    alt="Waveform"
+                >
+
+            </div>
+
+            <div>
+
+                <h2>Spectrogram</h2>
+
+                <img
+                    src="${data.spectrogram}"
+                    alt="Spectrogram"
+                >
+
+            </div>
+
+        </div>
 
         <h2>Removed Components</h2>
 
         <img
             src="${data.difference_spectrogram}"
-            width="700"
+            alt="Difference Spectrogram"
         >
-    `;
+
+        `;
+    }
+
+    catch(error){
+
+        document
+        .getElementById("results")
+        .innerHTML = `
+            <h2>Error</h2>
+            <p>
+                Failed to process audio.
+            </p>
+        `;
+
+        console.error(error);
+    }
+
+    finally{
+
+        document
+        .getElementById("loading")
+        .style.display = "none";
+    }
+
 });
 
 </script>
 
 </body>
+
 </html>

@@ -26,6 +26,9 @@ from app.metrics import (
     calculate_metrics
 )
 
+from app.assessment import (
+    generate_assessment
+)
 
 def process_audio(input_audio_path):
 
@@ -80,6 +83,11 @@ def process_audio(input_audio_path):
     transcript = transcribe_audio(
         cleaned_audio_path
     )
+    
+    assessment = generate_assessment(
+    transcript,
+    metrics
+)
 
     # Save transcript
     transcript_path = (
@@ -120,6 +128,7 @@ def process_audio(input_audio_path):
         "transcript": transcript,
         "metrics": metrics,
         "report": report,
+        "assessment": assessment,
         "cleaned_audio":
             "http://127.0.0.1:8000/outputs/cleaned_audio.wav",
         "waveform":
