@@ -33,8 +33,54 @@ noisereduce: library to reduce noise reduction
 enhancer.py
 
 3. Speech Understanding
-Creating speech to text module
-Using ffmpeg and whisper to do so
+After cleaning the audio, the next step is understanding what was spoken.
+speech-to-text module using Whisper. 
+Whisper is a pretrained speech recognition model that converts audio into text.
+
+Since users may upload MP3 or WAV files, FFmpeg is used to handle audio formats before transcription.
+The cleaned audio is passed into Whisper, which generates a transcript of the speech.
+
+4. Measuring Audio Quality
+To understand whether the restoration improved the audio, we calculate some basic metrics.
+
+Using metrics.py, we measure:
+Duration of the audio
+Original RMS energy
+Cleaned RMS energy
+Estimated noise reduction percentage
+
+5. Comparing Before and After
+Numbers alone do not tell the full story, so we generate visual comparisons.
+Waveforms are created for both the original and cleaned audio to compare amplitude changes over time.
+Spectrograms are also generated to compare frequency content before and after restoration.
+
+6. Generating Reports
+All outputs are combined into a report.
+
+The report contains:
+Audio metrics
+Speech transcript
+Processing summary
+
+The report is saved as a downloadable text file for later review.
+
+8. AI-Based Assessment
+To provide a human-readable analysis, Gemini is used.
+The transcript and calculated metrics are sent to Gemini, which generates a short assessment discussing:
+
+Speech clarity
+Noise reduction effectiveness
+Overall audio quality
 
 
+9. Building the Web Application
+FastAPI is used to create the backend of the application.
+Users upload an audio file through the web interface, and the processing pipeline runs automatically.
 
+The frontend is built using HTML, CSS, and JavaScript to display:
+Metrics
+Transcript
+AI Assessment
+Waveform Comparisons
+Spectrogram Comparisons
+Download Links
