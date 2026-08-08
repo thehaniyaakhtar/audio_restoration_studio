@@ -30,21 +30,35 @@ from app.assessment import (
     generate_assessment
 )
 
+
 def process_audio(input_audio_path):
 
     # Load audio
     audio, sr = load_audio(input_audio_path)
+
+    # Generate ORIGINAL visualizations
+    save_waveform(
+        audio,
+        sr,
+        "outputs/original_waveform.png"
+    )
+
+    save_spectrogram(
+        audio,
+        sr,
+        "outputs/original_spectrogram.png"
+    )
 
     # Remove noise
     cleaned_audio = remove_noise(
         audio,
         sr
     )
-    
+
     metrics = calculate_metrics(
-    audio,
-    cleaned_audio,
-    sr
+        audio,
+        cleaned_audio,
+        sr
     )
 
     # Save cleaned audio
@@ -58,47 +72,39 @@ def process_audio(input_audio_path):
         sr
     )
 
-    # Generate visualizations
-    waveform_path = (
-        "outputs/cleaned_waveform.png"
-    )
-
-    spectrogram_path = (
-        "outputs/cleaned_spectrogram.png"
-    )
-
+    # Generate cleaned visualizations
     save_waveform(
         cleaned_audio,
         sr,
-        waveform_path
+        "outputs/cleaned_waveform.png"
     )
 
     save_spectrogram(
         cleaned_audio,
         sr,
-        spectrogram_path
+        "outputs/cleaned_spectrogram.png"
+    )
+
+    save_difference_spectrogram(
+        audio,
+        cleaned_audio,
+        sr,
+        "outputs/difference_spectrogram.png"
     )
 
     # Transcribe audio
     transcript = transcribe_audio(
         cleaned_audio_path
     )
-    
+
     assessment = generate_assessment(
-    transcript,
-    metrics
+        transcript,
+        metrics
     )
 
     # Save transcript
     transcript_path = (
         "outputs/transcript.txt"
-    )
-    
-    save_difference_spectrogram(
-    audio,
-    cleaned_audio,
-    sr,
-    "outputs/difference_spectrogram.png"
     )
 
     with open(
@@ -110,8 +116,8 @@ def process_audio(input_audio_path):
 
     # Generate report
     report = generate_report(
-    transcript,
-    metrics
+        transcript,
+        metrics
     )
 
     report_path = (
@@ -122,23 +128,32 @@ def process_audio(input_audio_path):
         report,
         report_path
     )
-    original_audio_url = (
-    f"http://127.0.0.1:8000/{input_audio_path}"
-    )
+
     # Return results
     return {
         "transcript": transcript,
+
         "metrics": metrics,
+
         "report": report,
+
         "assessment": assessment,
-        "original_audio":
-            original_audio_url,
+
         "cleaned_audio":
             "http://127.0.0.1:8000/outputs/cleaned_audio.wav",
+
+        "original_waveform":
+            "http://127.0.0.1:8000/outputs/original_waveform.png",
+
         "waveform":
             "http://127.0.0.1:8000/outputs/cleaned_waveform.png",
+
+        "original_spectrogram":
+            "http://127.0.0.1:8000/outputs/original_spectrogram.png",
+
         "spectrogram":
             "http://127.0.0.1:8000/outputs/cleaned_spectrogram.png",
+
         "difference_spectrogram":
             "http://127.0.0.1:8000/outputs/difference_spectrogram.png"
     }
