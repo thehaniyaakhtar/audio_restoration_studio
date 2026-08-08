@@ -27,24 +27,12 @@ app.mount(
     name="outputs"
 )
 
-@app.get("/")
-def home():
-
-    return {
-        "message": "AI Audio Restoration Studio Running"
-    }
-
-@app.get(
-    "/",
-    response_class=HTMLResponse
-)
+@app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
 
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request
-        }
+        request=request,
+        name="index.html"
     )
 
 @app.post("/process")
