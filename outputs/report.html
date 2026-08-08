@@ -1,0 +1,60 @@
+<h1>Audio Restoration Report</h1>
+
+<h2>Metrics</h2>
+
+<h2>Transcript</h2>
+
+<h2>AI Analysis</h2>
+
+<img src="cleaned_waveform.png">
+
+<img src="cleaned_spectrogram.png">
+
+<img src="difference_spectrogram.png">
+
+def create_html_report(
+    transcript,
+    metrics
+):
+
+    html = f"""
+    <html>
+    <body>
+
+    <h1>Audio Restoration Dashboard</h1>
+
+    <h2>Metrics</h2>
+
+    <ul>
+        <li>Duration: {metrics['duration']} sec</li>
+        <li>Original RMS: {metrics['original_rms']}</li>
+        <li>Cleaned RMS: {metrics['cleaned_rms']}</li>
+        <li>Noise Reduction: {metrics['noise_reduction_percent']}%</li>
+    </ul>
+
+    <h2>Transcript</h2>
+
+    <p>{transcript}</p>
+
+    <h2>Waveform</h2>
+
+    <img src="cleaned_waveform.png" width="800">
+
+    <h2>Spectrogram</h2>
+
+    <img src="cleaned_spectrogram.png" width="800">
+
+    <h2>Removed Components</h2>
+
+    <img src="difference_spectrogram.png" width="800">
+
+    </body>
+    </html>
+    """
+
+    with open(
+        "outputs/report.html",
+        "w",
+        encoding="utf-8"
+    ) as f:
+        f.write(html)

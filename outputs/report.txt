@@ -1,21 +1,33 @@
 
-=== AUDIO RESTORATION REPORT ===
+=== AUDIO ANALYSIS REPORT ===
 
-Duration: 20.01 seconds
+Duration:
+20.01 seconds
 
-Processing Steps Completed:
-✓ Audio Loaded
-✓ Noise Reduction Applied
-✓ Waveform Generated
-✓ Spectrogram Generated
-✓ Speech Transcription Completed
+Original RMS:
+0.1288
+
+Cleaned RMS:
+0.0488
+
+Estimated Noise Reduction:
+62.14%
 
 Transcript:
-" One, two, three, four, five, six, seven, eight, nine, seven. One, two, three, four, five, six, seven, eight, nine, seven."
+ One, two, three, four, five, six, seven, eight, nine, seven. One, two, three, four, five, six, seven, eight, nine, seven.
 
-Output Files:
-- cleaned_audio.wav
-- cleaned_waveform.png
-- cleaned_spectrogram.png
+Analysis:
+
+Speech was successfully detected.
+
+Noise reduction was applied
+while preserving speech content.
+
+Generated Assets:
+
+- Cleaned Audio
+- Waveform
+- Spectrogram
+- Difference Spectrogram
 
 Status: SUCCESS

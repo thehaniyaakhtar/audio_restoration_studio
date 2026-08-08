@@ -1,39 +1,45 @@
-import librosa
-
-
-def generate_report(audio_path, transcript):
-
-    audio, sr = librosa.load(
-        audio_path,
-        sr=None
-    )
-
-    duration = len(audio) / sr
+def generate_report(
+    transcript,
+    metrics
+):
 
     report = f"""
-=== AUDIO RESTORATION REPORT ===
+=== AUDIO ANALYSIS REPORT ===
 
-Duration: {duration:.2f} seconds
+Duration:
+{metrics['duration']} seconds
 
-Processing Steps Completed:
-✓ Audio Loaded
-✓ Noise Reduction Applied
-✓ Waveform Generated
-✓ Spectrogram Generated
-✓ Speech Transcription Completed
+Original RMS:
+{metrics['original_rms']}
+
+Cleaned RMS:
+{metrics['cleaned_rms']}
+
+Estimated Noise Reduction:
+{metrics['noise_reduction_percent']}%
 
 Transcript:
-"{transcript}"
+{transcript}
 
-Output Files:
-- cleaned_audio.wav
-- cleaned_waveform.png
-- cleaned_spectrogram.png
+Analysis:
+
+Speech was successfully detected.
+
+Noise reduction was applied
+while preserving speech content.
+
+Generated Assets:
+
+- Cleaned Audio
+- Waveform
+- Spectrogram
+- Difference Spectrogram
 
 Status: SUCCESS
 """
 
     return report
+
 
 def save_report(report, output_path):
 

@@ -5,7 +5,8 @@ from app.audio_utils import (
 
 from app.visualizer import (
     save_waveform,
-    save_spectrogram
+    save_spectrogram,
+    save_difference_spectrogram
 )
 
 from app.enhancer import (
@@ -21,6 +22,10 @@ from app.reporter import (
     save_report
 )
 
+from app.metrics import (
+    calculate_metrics
+)
+
 
 def process_audio(input_audio_path):
 
@@ -31,6 +36,12 @@ def process_audio(input_audio_path):
     cleaned_audio = remove_noise(
         audio,
         sr
+    )
+    
+    metrics = calculate_metrics(
+    audio,
+    cleaned_audio,
+    sr
     )
 
     # Save cleaned audio
@@ -74,6 +85,13 @@ def process_audio(input_audio_path):
     transcript_path = (
         "outputs/transcript.txt"
     )
+    
+    save_difference_spectrogram(
+    audio,
+    cleaned_audio,
+    sr,
+    "outputs/difference_spectrogram.png"
+    )
 
     with open(
         transcript_path,
@@ -84,8 +102,8 @@ def process_audio(input_audio_path):
 
     # Generate report
     report = generate_report(
-        cleaned_audio_path,
-        transcript
+    transcript,
+    metrics
     )
 
     report_path = (
@@ -99,14 +117,15 @@ def process_audio(input_audio_path):
 
     # Return results
     return {
-    "transcript": transcript,
-    "report": report,
-    "cleaned_audio":
-        "http://127.0.0.1:8000/outputs/cleaned_audio.wav",
-
-    "waveform":
-        "http://127.0.0.1:8000/outputs/cleaned_waveform.png",
-
-    "spectrogram":
-        "http://127.0.0.1:8000/outputs/cleaned_spectrogram.png"
+        "transcript": transcript,
+        "metrics": metrics,
+        "report": report,
+        "cleaned_audio":
+            "http://127.0.0.1:8000/outputs/cleaned_audio.wav",
+        "waveform":
+            "http://127.0.0.1:8000/outputs/cleaned_waveform.png",
+        "spectrogram":
+            "http://127.0.0.1:8000/outputs/cleaned_spectrogram.png",
+        "difference_spectrogram":
+            "http://127.0.0.1:8000/outputs/difference_spectrogram.png"
     }

@@ -1,14 +1,19 @@
 import numpy as np
 
+def calculate_metrics(
+    original_audio,
+    cleaned_audio,
+    sr
+):
 
-def calculate_metrics(original_audio, cleaned_audio):
+    duration = len(original_audio) / sr
 
     original_rms = np.sqrt(
-        np.mean(original_audio**2)
+        np.mean(original_audio ** 2)
     )
 
     cleaned_rms = np.sqrt(
-        np.mean(cleaned_audio**2)
+        np.mean(cleaned_audio ** 2)
     )
 
     reduction_percent = (
@@ -17,9 +22,11 @@ def calculate_metrics(original_audio, cleaned_audio):
     ) * 100
 
     return {
-        "original_rms": float(original_rms),
-        "cleaned_rms": float(cleaned_rms),
-        "noise_reduction_percent": float(
-            reduction_percent
+        "duration": round(duration, 2),
+        "original_rms": round(float(original_rms), 4),
+        "cleaned_rms": round(float(cleaned_rms), 4),
+        "noise_reduction_percent": round(
+            float(reduction_percent),
+            2
         )
     }
