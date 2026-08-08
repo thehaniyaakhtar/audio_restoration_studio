@@ -1,10 +1,12 @@
-fastapi uvicorn
+fastapi
+uvicorn
 librosa
-matplotlib
-soundfile
 noisereduce
-python-multipart
 openai-whisper
+python-multipart
+jinja2
+matplotlib
 numpy
+soundfile
 google-genai
-dotenv
+python-dotenv
