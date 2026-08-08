@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        AI Audio Restoration Studio
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>
+        AI Audio Restoration Studio
+    </h1>
+
+    <form
+        id="upload-form"
+        enctype="multipart/form-data"
+    >
+
+        <input
+            type="file"
+            id="audio"
+            accept=".mp3,.wav"
+        >
+
+        <button type="submit">
+            Process Audio
+        </button>
+
+    </form>
+
+    <div id="results"></div>
+
+</div>
+
+<script>
+
+document
+.getElementById("upload-form")
+.addEventListener(
+"submit",
+async function(e){
+
+    e.preventDefault();
+
+    const file =
+    document.getElementById("audio")
+    .files[0];
+
+    const formData =
+    new FormData();
+
+    formData.append(
+        "file",
+        file
+    );
+
+    const response =
+    await fetch(
+        "/process",
+        {
+            method:"POST",
+            body:formData
+        }
+    );
+
+    const data =
+    await response.json();
+
+    document
+    .getElementById("results")
+    .innerHTML = `
+        <h2>Transcript</h2>
+        <p>${data.transcript}</p>
+
+        <h2>Metrics</h2>
+
+        <p>
+        Duration:
+        ${data.metrics.duration}s
+        </p>
+
+        <p>
+        Noise Reduction:
+        ${data.metrics.noise_reduction_percent}%
+        </p>
+
+        <img
+            src="${data.waveform}"
+            width="700"
+        >
+
+        <img
+            src="${data.spectrogram}"
+            width="700"
+        >
+
+        <img
+            src="${data.difference_spectrogram}"
+            width="700"
+        >
+    `;
+});
+
+</script>
+
+</body>
+</html>
