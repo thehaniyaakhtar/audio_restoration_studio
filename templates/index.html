@@ -37,6 +37,10 @@
 
     </form>
 
+    <div id="loading" style="display:none">
+    Processing Audio...
+    </div>
+
     <div id="results"></div>
 
 </div>
@@ -62,6 +66,9 @@ async function(e){
         "file",
         file
     );
+    document
+    .getElementById("loading")
+    .style.display = "block";
 
     const response =
     await fetch(
@@ -76,32 +83,62 @@ async function(e){
     await response.json();
 
     document
+    .getElementById("loading")
+    .style.display = "none";
+
+    document
     .getElementById("results")
     .innerHTML = `
+        <h2>Cleaned Audio</h2>
+
+        <audio controls>
+            <source
+                src="${data.cleaned_audio}"
+                type="audio/wav"
+            >
+        </audio>
+
         <h2>Transcript</h2>
+
         <p>${data.transcript}</p>
 
         <h2>Metrics</h2>
 
-        <p>
-        Duration:
-        ${data.metrics.duration}s
-        </p>
+        <div class="metrics">
 
-        <p>
-        Noise Reduction:
-        ${data.metrics.noise_reduction_percent}%
-        </p>
+            <div class="card">
+                <h3>Duration</h3>
+                <p>${data.metrics.duration}s</p>
+            </div>
+
+            <div class="card">
+                <h3>Noise Reduction</h3>
+                <p>${data.metrics.noise_reduction_percent}%</p>
+            </div>
+
+        </div>
+
+        <h2>AI Assessment</h2>
+
+        <pre>
+        ${data.report}
+        </pre>
+
+        <h2>Waveform</h2>
 
         <img
             src="${data.waveform}"
             width="700"
         >
 
+        <h2>Spectrogram</h2>
+
         <img
             src="${data.spectrogram}"
             width="700"
         >
+
+        <h2>Removed Components</h2>
 
         <img
             src="${data.difference_spectrogram}"
