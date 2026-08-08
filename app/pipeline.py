@@ -87,7 +87,7 @@ def process_audio(input_audio_path):
     assessment = generate_assessment(
     transcript,
     metrics
-)
+    )
 
     # Save transcript
     transcript_path = (
@@ -122,13 +122,17 @@ def process_audio(input_audio_path):
         report,
         report_path
     )
-
+    original_audio_url = (
+    f"http://127.0.0.1:8000/{input_audio_path}"
+    )
     # Return results
     return {
         "transcript": transcript,
         "metrics": metrics,
         "report": report,
         "assessment": assessment,
+        "original_audio":
+            original_audio_url,
         "cleaned_audio":
             "http://127.0.0.1:8000/outputs/cleaned_audio.wav",
         "waveform":

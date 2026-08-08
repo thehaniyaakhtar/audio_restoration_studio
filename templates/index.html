@@ -110,7 +110,26 @@ async function(e){
         .getElementById("results")
         .innerHTML = `
 
-        <h2>Cleaned Audio</h2>
+        <h2>Audio Comparison</h2>
+
+        <div class="results-grid">
+
+            <div class="card">
+
+                <h3>Original Audio</h3>
+
+                <audio controls>
+                    <source
+                        src="${data.original_audio}"
+                        type="audio/wav"
+                    >
+                </audio>
+
+            </div>
+
+    <div class="card">
+
+        <h3>Cleaned Audio</h3>
 
         <audio controls>
             <source
@@ -119,6 +138,10 @@ async function(e){
             >
         </audio>
 
+    </div>
+
+</div>
+
         <h2>Metrics</h2>
 
         <div class="metrics-grid">
@@ -126,6 +149,16 @@ async function(e){
             <div class="card">
                 <h3>Duration</h3>
                 <p>${data.metrics.duration}s</p>
+            </div>
+
+            <div class="card">
+                <h3>Original RMS</h3>
+                <p>${data.metrics.original_rms}</p>
+            </div>
+
+            <div class="card">
+                <h3>Cleaned RMS</h3>
+                <p>${data.metrics.cleaned_rms}</p>
             </div>
 
             <div class="card">
@@ -145,6 +178,39 @@ async function(e){
 
         <div class="card">
             <p>${data.transcript}</p>
+        </div>
+
+        <h2>Downloads</h2>
+
+        <div class="metrics-grid">
+
+            <div class="card">
+                <a
+                    href="${data.cleaned_audio}"
+                    download
+                >
+                    Download Cleaned Audio
+                </a>
+            </div>
+
+            <div class="card">
+                <a
+                    href="http://127.0.0.1:8000/outputs/transcript.txt"
+                    download
+                >
+                    Download Transcript
+                </a>
+            </div>
+
+            <div class="card">
+                <a
+                    href="http://127.0.0.1:8000/outputs/report.txt"
+                    download
+                >
+                    Download Report
+                </a>
+            </div>
+
         </div>
 
         <div class="results-grid">
