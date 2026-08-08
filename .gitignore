@@ -1,3 +1,49 @@
-.venv
-__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment Variables
 .env
+
+# FastAPI / Uvicorn
+*.log
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Audio Files
+sample_audio/*
+!sample_audio/.gitkeep
+
+# Generated Outputs
+outputs/*
+!outputs/.gitkeep
+
+# Temporary Files
+*.tmp
+*.temp
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python Build Files
+build/
+dist/
+*.egg-info/
+
+# Whisper Models Cache
+.cache/
