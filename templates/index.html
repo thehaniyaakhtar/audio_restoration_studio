@@ -110,34 +110,6 @@ async function(e){
         .getElementById("results")
         .innerHTML = `
 
-        <h2>Waveform Comparison</h2>
-
-        <div class="results-grid">
-
-            <div class="card">
-
-                <h3>Original Waveform</h3>
-
-                <img
-                    src="${data.original_waveform}"
-                    alt="Original Waveform"
-                >
-
-            </div>
-
-            <div class="card">
-
-                <h3>Cleaned Waveform</h3>
-
-                <img
-                    src="${data.waveform}"
-                    alt="Cleaned Waveform"
-                >
-
-            </div>
-
-        </div>
-
         <h2>Metrics</h2>
 
         <div class="metrics-grid">
@@ -164,6 +136,19 @@ async function(e){
 
         </div>
 
+        <h2>Cleaned Audio</h2>
+
+        <div class="card">
+
+            <audio controls style="width:100%">
+                <source
+                    src="${data.cleaned_audio}"
+                    type="audio/wav"
+                >
+            </audio>
+
+        </div>
+
         <h2>AI Assessment</h2>
 
         <div class="card">
@@ -176,77 +161,67 @@ async function(e){
             <p>${data.transcript}</p>
         </div>
 
+        <h2>Waveform Comparison</h2>
+
+        <div class="results-grid">
+
+            <div class="card">
+                <h3>Original Waveform</h3>
+                <img src="${data.original_waveform}">
+            </div>
+
+            <div class="card">
+                <h3>Enhanced Waveform</h3>
+                <img src="${data.waveform}">
+            </div>
+
+        </div>
+
+        <h2>Spectrogram Comparison</h2>
+
+        <div class="results-grid">
+
+            <div class="card">
+                <h3>Original Spectrogram</h3>
+                <img src="${data.original_spectrogram}">
+            </div>
+
+            <div class="card">
+                <h3>Cleaned Spectrogram</h3>
+                <img src="${data.spectrogram}">
+            </div>
+
+        </div>
+
+        <h2>Removed Components</h2>
+
+        <div class="card">
+            <img src="${data.difference_spectrogram}">
+        </div>
+
         <h2>Downloads</h2>
 
         <div class="metrics-grid">
 
             <div class="card">
-                <a
-                    href="${data.cleaned_audio}"
-                    download
-                >
+                <a href="${data.cleaned_audio}" download>
                     Download Cleaned Audio
                 </a>
             </div>
 
             <div class="card">
-                <a
-                    href="http://127.0.0.1:8000/outputs/transcript.txt"
-                    download
-                >
+                <a href="/outputs/transcript.txt" download>
                     Download Transcript
                 </a>
             </div>
 
             <div class="card">
-                <a
-                    href="http://127.0.0.1:8000/outputs/report.txt"
-                    download
-                >
+                <a href="/outputs/report.txt" download>
                     Download Report
                 </a>
             </div>
 
         </div>
-
-        <div class="results-grid">
-
-            <div>
-
-                <h2>Spectrogram Comparison</h2>
-
-<div class="results-grid">
-
-    <div class="card">
-
-        <h3>Original Spectrogram</h3>
-
-        <img
-            src="${data.original_spectrogram}"
-            alt="Original Spectrogram"
-        >
-
-    </div>
-
-    <div class="card">
-
-        <h3>Cleaned Spectrogram</h3>
-
-        <img
-            src="${data.spectrogram}"
-            alt="Cleaned Spectrogram"
-        >
-
-    </div>
-
-</div>
-
-        <h2>Removed Components</h2>
-
-        <img
-            src="${data.difference_spectrogram}"
-            alt="Difference Spectrogram"
-        >
 
         `;
     }
