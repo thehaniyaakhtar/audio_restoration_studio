@@ -220,7 +220,11 @@ The audio restoration successfully enhanced the recording's quality. Speech clar
 ```
 
 ---
+## Screenshots
+<img width="1012" height="845" alt="Screenshot (1607)" src="https://github.com/user-attachments/assets/9f830d52-4194-4fa4-9564-e481017c0143" />
+<img width="720" height="707" alt="Screenshot (1608)" src="https://github.com/user-attachments/assets/224be200-6505-40b8-b79a-c3e437007492" />
 
+---
 ## Future Improvements
 
 - Real-time audio processing
